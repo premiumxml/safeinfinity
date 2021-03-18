@@ -1,22 +1,23 @@
-var protocol = (
-      ("https:" == document.location.protocol) 
-      ? "https" 
-      : "http"
-  );
-  document.write(
-      unescape(
-          "%3Cscript"
-              + " src='"
-                  + protocol 
-                  + "://"
-                  + "www.blogger.com"
-                  + "/feeds/1606337331133671005/posts/default?alt=json-in-script&max-results=150&callback=showurl"
-              + "'"
-              + " type='text/javascript'
-          + "%3E"
-          + "%3C/script%3E"
-      ) // this HAS to be escaped, otherwise it would 
-        // close the actual (not injected) <script> element
+$.ajax({  
+ url : '/feeds/1606337331133671005/posts/default?alt=json-in-script&max-results=150&callback=showurl',  
+ type: 'get',  
+ dataType: 'jsonp',  
+ success: function(data) {  
+ var link = '',  
+ content = data.feed.entry,  
+ links =new Array();   
+ if (content !== undefined) {  
+ for (var i = 0; i < content.length; i++) {  
+ for (var j = 0; j < content[i].link.length; j++) {  
+ if (content[i].link[j].rel == "alternate") {  
+ link = content[i].link[j].href;  
+ break;  
+ }  
+ }  
+       
+       
+       
+
   );
 
 
